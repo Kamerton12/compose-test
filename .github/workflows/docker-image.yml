@@ -29,5 +29,9 @@ jobs:
       run: chmod +x ./gradlew
     - name: Build ktor
       run: ./gradlew installDist
+    - name: Set up Docker Buildx      
+      uses: crazy-max/ghaction-docker-buildx@v1      
+      with:        
+        version: latest 
     - name: Build the Docker image
       run: docker buildx build --platform linux/arm --file Dockerfile --tag maxdroz/test-repo:$(date +%s) .
