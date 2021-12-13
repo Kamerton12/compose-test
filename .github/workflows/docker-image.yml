@@ -25,6 +25,8 @@ jobs:
       with:
         java-version: '11'
         distribution: 'adopt'
+    - name: Make gradlew executable
+      run: chmod +x ./gradlew
     - name: Build ktor
       run: ./gradlew installDist
     - name: Build the Docker image
