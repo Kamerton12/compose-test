@@ -24,10 +24,15 @@ jobs:
       with:
         java-version: '11'
         distribution: 'adopt'
-    - name: Make gradlew executable
-      run: chmod +x ./gradlew
+#    - name: Make gradlew executable
+#      run: chmod +x ./gradlew
+#    - name: Build ktor
+#      run: ./gradlew installDist
     - name: Build ktor
-      run: ./gradlew installDist
+      uses: burrunan/gradle-cache-action@v1
+      with:
+        arguments: installDist
+        gradle-version: wrapper
     # https://github.com/docker/setup-qemu-action
     - name: Set up QEMU
       uses: docker/setup-qemu-action@v1
