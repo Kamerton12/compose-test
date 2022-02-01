@@ -44,6 +44,8 @@ jobs:
     # Ignore the failure of a step and avoid terminating the job.
 #        continue-on-error: true
 
+#docker cache
+##########################################################
     - name: Docker meta
       id: meta
       uses: docker/metadata-action@v3
@@ -60,11 +62,10 @@ jobs:
       with:
         context: .
         push: true
-#        tags: maxdroz/test-repo:latest,maxdroz/test-repo:$(date +%s)
         tags: ${{ steps.meta.outputs.tags }}
         platforms: linux/arm
         cache-from: type=gha
-        cache-to: type=gha,mode=max
-
+        cache-to: type=gha,mode=min
+#####################################################################
 #    - name: Build the Docker image
-#      run: docker buildx build --platform linux/arm --file Dockerfile --tag maxdroz/test-repo:$(date +%s) --tag maxdroz/test-repo:latest --push .
+#      run: docker buildx build --platform linux/arm --file Dockerfile --tag maxdroz/test-repo:edge --tag maxdroz/test-repo:latest --push .
